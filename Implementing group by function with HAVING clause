@@ -1,0 +1,45 @@
+CREATE TABLE employee_details(
+Empid number(5),
+Empname varchar(20),  
+Empdepartment varchar(20),  
+Empsalary number(15),
+Constraint s check(empsalary>25000));
+
+INSERT INTO employee_details values
+(1101,'A','HR',45000);
+ 
+
+INSERT INTO employee_details values
+(1102,'B','HR',40000);
+
+
+INSERT INTO employee_details values
+(1103,'C','IT',30000);
+
+
+INSERT INTO employee_details values
+(1104,'D','IT',68000);
+
+
+INSERT INTO employee_details values
+(1105,'E','Finance',70000);
+select * from employee_details
+
+
+Select empdepartment,max(empsalary) from employee_details GROUP BY empdepartment HAVING
+max(empsalary)>=65000;
+
+Select empdepartment,max(empsalary) from employee_details GROUP BY empdepartment HAVING
+max(empsalary)>50000;
+
+Select empdepartment,min(empsalary) from employee_details GROUP BY empdepartment HAVING
+min(empsalary)>50000;
+
+Select empdepartment,avg(empsalary) from employee_details GROUP BY empdepartment HAVING
+avg(empsalary)>30000;
+
+Select empdepartment,sum(empsalary) from employee_details GROUP BY empdepartment HAVING
+sum(empsalary)>40000;
+
+Select empdepartment,count(empid) from employee_details GROUP BY empdepartment HAVING
+count(empid)>1;
