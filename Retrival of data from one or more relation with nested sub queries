@@ -1,0 +1,35 @@
+create table instructor
+(id number(5),
+name varchar(20) not null,  
+dept_name varchar(20),  
+salary number(8,2));
+
+INSERT INTO instructor values
+(10110,'palanii','CTUG',60000);
+ 
+INSERT INTO instructor values
+(10111,'raj','CTUG',70000);
+
+INSERT INTO instructor values
+(10112,'RAM','IT',80000);
+
+INSERT INTO instructor values
+(10113,'ravi','CSE',160000);
+
+INSERT INTO instructor values
+(10114,'kumar','CTUG',30000);
+
+INSERT INTO instructor values
+(10115,'JOHN','CSE',50000);
+
+select * from instructor;
+
+Select * from instructor where name in('raj','ravi');
+
+Select * from instructor where name not in('raj','ragu');
+
+Select name from instructor where salary > some (select salary from instructor where dept_name='CTUG');
+
+Select name from instructor where salary > all (select salary from instructor where dept_name='CTUG');
+
+Select dept_name from instructor where salary >= all (select avg(salary) from instructor group by dept_name);
