@@ -1,0 +1,90 @@
+CREATE TABLE cus (
+  Id NUMBER(10) PRIMARY KEY,
+  Name VARCHAR(20) NOT NULL,
+  Salary NUMBER(20)
+);
+
+
+
+
+CREATE TABLE cus (
+  Id NUMBER(10) PRIMARY KEY,
+  Name VARCHAR(20) NOT NULL,
+  Salary NUMBER(20)
+);
+INSERT INTO cus VALUES (101, 'John', 22000);
+INSERT INTO cus VALUES (102, 'Sara', 19000);
+INSERT INTO cus VALUES (103, 'Gowtham', 17000);
+INSERT INTO cus VALUES (104, 'Raina', 27000);
+INSERT INTO cus VALUES (105, 'Suresh', 23500);
+
+SELECT * FROM cus;
+drop table cus;
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER t1
+BEFORE INSERT OR UPDATE ON cus
+FOR EACH ROW
+BEGIN
+  :NEW.Name := UPPER(:NEW.Name);
+END;
+/
+
+INSERT INTO cus VALUES (106, 'Vishnu', 34500);
+SELECT * FROM cus;
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER t2
+BEFORE INSERT OR UPDATE OR DELETE ON cus
+FOR EACH ROW
+BEGIN
+  IF :NEW.Salary < 5000 THEN
+    :NEW.Salary := 10500;
+  END IF;
+END;
+/
+INSERT INTO cus VALUES (8, 'Ajay', 5000);
+SELECT * FROM cus;
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE cus1 (
+  Name VARCHAR(20),
+  Salary NUMBER(20)
+);
+CREATE OR REPLACE TRIGGER t3
+AFTER INSERT OR UPDATE ON cus
+FOR EACH ROW
+BEGIN
+  INSERT INTO cus1 VALUES (:NEW.Name, :NEW.Salary);
+END;
+/
+INSERT INTO cus VALUES (17, 'Anu', 50000);
+SELECT * FROM cus1;
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE cus2 (
+  Id NUMBER(20),
+  Name VARCHAR(20)
+);
+CREATE OR REPLACE TRIGGER t4
+BEFORE DELETE ON cus
+FOR EACH ROW
+BEGIN
+  INSERT INTO cus2 VALUES (:OLD.Id, :OLD.Name);
+END;
+/
+DELETE FROM cus WHERE Id = 103;
+SELECT * FROM cus;
+-------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE cus22 (
+  Id NUMBER(20),
+  Name VARCHAR(20)
+);
+CREATE OR REPLACE TRIGGER t5
+AFTER DELETE ON cus
+FOR EACH ROW
+BEGIN
+  INSERT INTO cus22 VALUES (:OLD.Id, :OLD.Name);
+END;
+/
+DELETE FROM cus WHERE Id = 105;
+SELECT * FROM cus22;
+
+drop table cus2
+drop trigger t4
