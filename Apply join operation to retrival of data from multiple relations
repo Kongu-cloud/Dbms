@@ -1,0 +1,48 @@
+CREATE TABLE s1(
+Stu_id number(5),
+Stu_name varchar(20),
+Course_id varchar(20) PRIMARY KEY,
+Year number(5)
+);
+
+INSERT INTO s1 values (1,'a','C01',1);
+INSERT INTO s1 values (2,'b','C02',2);
+INSERT INTO s1 values (3,'c','C03',3);
+INSERT INTO s1 values (4,'d','C04',4);
+INSERT INTO s1 values (5,'e','C05',5);
+
+CREATE TABLE c21(
+Course_name varchar(20),
+Course_id varchar(20) PRIMARY KEY,
+Credits varchar(20)
+);
+
+
+INSERT INTO c21 values ('a','C02',4);
+INSERT INTO c21 values ('b','C04',5);
+INSERT INTO c21 values ('c','C05',4);
+INSERT INTO c21 values ('d','C06',3);
+INSERT INTO c21 values ('e','C07',4);
+
+select * from c21;
+
+SELECT * FROM s1 JOIN c1 using (course_id);
+SELECT * FROM s1 INNER JOIN c1 using (course_id);
+SELECT * FROM s1 LEFT OUTER JOIN c1 using (course_id);
+SELECT * FROM s1 RIGHT OUTER JOIN c1 using (course_id);
+SELECT * FROM s1 FULL OUTER JOIN c1 using (course_id);
+
+SELECT * FROM c1 LEFT OUTER JOIN s1 using (course_id);
+SELECT * FROM c1 RIGHT OUTER JOIN s1 using (course_id);
+SELECT * FROM c1 FULL OUTER JOIN s1 using (course_id);
+
+SELECT * FROM s1 INNER JOIN c1 ON s1.course_id=c1.course_id;
+SELECT * FROM s1 LEFT OUTER JOIN c1 ON s1.course_id=c1.course_id;
+SELECT * FROM s1 RIGHT OUTER JOIN c1 ON s1.course_id=c1.course_id;
+SELECT * FROM s1 FULL OUTER JOIN c1 ON s1.course_id=c1.course_id;
+SELECT * FROM s1 NATURAL JOIN c1;
+
+SELECT * FROM s1 NATURAL INNER JOIN c1;
+SELECT * FROM s1 NATURAL LEFT OUTER JOIN c1;
+SELECT * FROM s1 NATURAL RIGHT OUTER JOIN c1;
+SELECT * FROM s1 NATURAL FULL OUTER JOIN c1;
