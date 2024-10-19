@@ -1,0 +1,86 @@
+Create table emp(
+Id number(5) PRIMARY KEY,
+Name varchar(20) NOT NULL,
+Dept_name varchar(20) NOT NULL,
+Salary number(20) );
+
+Insert into emp values(101,'john','cse',22000);
+Insert into emp values(102,'sara','bsc',19000);
+Insert into emp values(103,'gowtham','bsc',17000);
+Insert into emp values(104,'raina','ece',27000);
+Insert into emp values(105,'suresh','it',23500);
+
+Select * from emp;
+
+CREATE OR REPLACE FUNCTION TOT_EMPLOYEES
+Return number as
+coun number(2):=0;
+      BEGIN
+    SELECT COUNT(*) INTO coun FROM emp;
+    RETURN coun;
+    END
+    /
+
+DECLARE
+   Count2 number(2);
+BEGIN
+   Count2 := TOT_EMPLOYEES();
+   Dbms_output.put_line('Total no. Of Employees: ' || count2);
+END
+/
+ 
+Create table cus(
+Id number(10) PRIMARY KEY,
+Name varchar(20) NOT NULL,
+Salary number(20) );
+
+Insert into cus values(101,'john',22000);
+Insert into cus values(102,'sara',19000);
+Insert into cus values(103,'gowtham',17000);
+Insert into cus values(104,'raina',27000);
+Insert into cus values(105,'suresh',23500);
+
+Select * from cus;
+
+CREATE OR REPLACE FUNCTION cus_name (cusid IN number)
+    RETURN VARCHAR as
+   Name varchar2(20);
+BEGIN
+SELECT name into Name FROM cus where id = cusid;
+   RETURN Name;
+END;
+  /
+Set serveroutput on;
+
+DECLARE
+Cusname varchar2(20);
+  Cusid number(3);
+BEGIN
+Cusid:=102;
+Cusname := cus_name(cusid);
+Dbms_output.put_line('Name of the given customer: ' || cusname);
+END;
+/
+-------------------------------------------------------------------------------------------------------------------------------
+DECLARE
+   N number;
+   Fact number;
+FUNCTION factorial(a number)
+RETURN number
+IS
+   F number;
+BEGIN
+   IF a=0 THEN
+      F := 1;
+   ELSE
+      F := a * factorial(a-1);
+   END IF;
+RETURN f;
+END;
+
+BEGIN
+   N:= 6;
+   Fact := factorial(n);
+   Dbms_output.put_line(' Factorial '|| n || ' is ' || fact);
+END;
+/
