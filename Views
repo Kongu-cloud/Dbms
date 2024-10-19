@@ -1,1 +1,38 @@
+Create table employeee1(
+Id number(5),
+Emp_name varchar(20),
+Dpt_name varchar(20),
+Salary number(10)
+);
+Insert into employeee1 values(101,'ram','cse',12000);
+Insert into employeee1 values(102,'raja','ece',15700);
+Insert into employeee1 values(103,'gowtham','eee',18000);
+Insert into employeee1 values(104,'madhan','it',21000);
+Insert into employeee1 values(105,'vishnu','it',22000);
 
+Select * from employeee1;
+
+Create table department1(
+Dptname varchar(20),
+Location varchar(20)
+);
+
+Insert into department1 values('eee','erode');
+Insert into department1 values('ece','chennai');
+Insert into department1 values('cse','selam');
+Insert into department1 values('it','bangalore');
+Insert into department1 values('it','tirpur');
+
+Select * from department1;
+
+Create view empid as select id from employeee1 where dpt_name='it';
+Select * from empid;
+
+Create view empsalary as select emp_name,salary from employeee1;
+Select * from empsalary;
+
+Create view emp_dept3 as select emp_name,location from employeee1,department where employeee1.dpt_name=department.dptname;
+Select * from emp_dept3;
+
+Create view emp_dept4 as select emp_name,location from employeee1,department1 where employeee1.dpt_name=department1.dptname and employeee1.dpt_name='it';
+Select * from emp_dept4;
